@@ -38,6 +38,7 @@ class ParseStrace(Thread):
         self.cachesyscalls=[]
         self.lock_cachesyscalls = Lock()
         self.allowedSyscallDic=profile
+        self.debug(profile,3)
 
     def debug(self, msg, level=1):
         if self._debug and level<=self.loglevel:
@@ -102,7 +103,7 @@ class ParseStrace(Thread):
                     if m!=None:
                         key.extend(m.groups())
                     else:
-                        print ">>> TODO FIXME", syscall, msg
+                        self.debug("syscall exist in dictionary but pattern not match: syscall:{}, pattern:'{}', strace:{} ...".format(syscall, pattern, msg[0:50]),6)
                         return
                 if not self.checkIsAllowed(key):
                     self.debug("It is not allowed : {}".format(key),4)

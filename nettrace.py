@@ -19,6 +19,7 @@ class Main():
         self.debug=False
         self.argparse_thread=None
         self.profile=False
+        self.leveldebug=0
 
         # parse arguments
         self.parseArgs()
@@ -32,8 +33,8 @@ class Main():
             dic=prf.getDic()
             if dic==None:
                 sys.exit(1)
-        self.printDebug(dic)
-        self.argparse_thread=ParseStrace("454", dic, debug=self.debug, loglevel=4) # TODO Fixme
+
+        self.argparse_thread=ParseStrace("454", dic, debug=self.debug, loglevel=self.leveldebug) # TODO Fixme
         self.argparse_thread.start()
         
         while self.argparse_thread:
@@ -56,8 +57,15 @@ class Main():
         parser = argparse.ArgumentParser()
         parser.add_argument("-v", "--version", help="show version", action="store_true")
         parser.add_argument("-p", "--profile", help="profile file", metavar="FILENAME")
-        parser.add_argument("--debug", help="Debug", action="store_true")
+        parser.add_argument("-d", "--debug", help="Debug", action="store_true")
+        parser.add_argument("-l", "--leveldebug", help="level for debug",type=int, default=0)
         args=parser.parse_args()
+
+        
+
+        if (not args.debug and args.leveldebug!=0):
+            parser.error('--leveldebug (-l) require --debug (-d) !')
+
 
         appName=sys.argv[0]
         if args.version==True:
@@ -65,6 +73,8 @@ class Main():
             sys.exit()
         if args.debug==True:
             self.debug=True
+            self.leveldebug=args.leveldebug
+
         if args.profile:
             self.profile=args.profile
 
@@ -72,7 +82,6 @@ class Main():
         # if log
         if self.log:
             self.my_logger.critical("appFirewall: %s" % msg)
-
 
 
 
