@@ -1,0 +1,15 @@
+execve
+bind
+sendto
+connect
+listen
+recvfrom
+socket;SOCK_RAW|SOCK_STREAM|SOCK_DGRAM
+open;/dev/null;O_RDWR
+open;.;O_RDONLY
+open;/proc/*;O_RDONLY
+open;/dev/*;O_RDONLY
+open;/lib/*;O_RDONLY
+open;/usr/*;O_RDONLY
+open;/etc/*;O_RDONLY|O_RDWR
+
