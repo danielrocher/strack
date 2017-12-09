@@ -37,7 +37,7 @@ class ParseStrace(Thread):
         self.loglevel=loglevel
         self.cachesyscalls=[]
         self.lock_cachesyscalls = Lock()
-        self.allowedSigcallDic=profile
+        self.allowedSyscallDic=profile
 
     def debug(self, msg, level=1):
         if self._debug and level<=self.loglevel:
@@ -62,8 +62,8 @@ class ParseStrace(Thread):
             # first add it
             self.addInCache(key)
             syscall=key[0]
-            if syscall in self.allowedSigcallDic:
-                value=self.allowedSigcallDic[syscall]
+            if syscall in self.allowedSyscallDic:
+                value=self.allowedSyscallDic[syscall]
                 if value == True:
                     return True
                 elif value == False:

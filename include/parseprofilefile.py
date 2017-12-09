@@ -5,7 +5,7 @@
 # Portions created by the Initial Developer are Copyright (C) 2017
 
 
-import re, sys
+import re
 
 
 class ParseProfileFile():
@@ -66,7 +66,7 @@ class ParseProfileFile():
 
 
 if __name__ == '__main__':
-    prf=ParseProfileFile("sshd.prf")
+    prf=ParseProfileFile("../profiles/sshd.prf")
     print prf.getDic()
 
 

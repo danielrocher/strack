@@ -32,7 +32,7 @@ class Main():
             dic=prf.getDic()
             if dic==None:
                 sys.exit(1)
-        print dic
+        self.printDebug(dic)
         self.argparse_thread=ParseStrace("454", dic, debug=self.debug, loglevel=4) # TODO Fixme
         self.argparse_thread.start()
         
