@@ -34,11 +34,14 @@ class Main():
             if dic==None:
                 sys.exit(1)
 
-        self.argparse_thread=ParseStrace("454", dic, debug=self.debug, loglevel=self.leveldebug) # TODO Fixme
+        self.argparse_thread=ParseStrace("454", dic, callbackWarning=self.callbackWarning, debug=self.debug, loglevel=self.leveldebug) # TODO Fixme
         self.argparse_thread.start()
         
         while self.argparse_thread:
             time.sleep(1)
+
+    def callbackWarning(self, l):
+        print l # TODO WRITE ME
 
 
     def signal_handler(self, signal, frame):

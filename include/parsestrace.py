@@ -12,9 +12,10 @@ from threading import Thread, Lock
 
 
 class ParseStrace(Thread):
-    def __init__(self, pid, profile, debug=False, loglevel=1):
+    def __init__(self, pid, profile, callbackWarning=None, debug=False, loglevel=1):
         Thread.__init__(self)
         self.pid=pid
+        self.callbackWarning=callbackWarning
         self.syscallsDicPattern={
             "execve"     : ".*\(\"(.*)\",.*",
             "open"       : ".*\(\"(.*)\",.*(O_RDONLY|O_RDWR|O_WRONLY).*",
@@ -86,7 +87,9 @@ class ParseStrace(Thread):
                 else:
                     self.debug("Unknown Error :  {}".format(value),6)
             else:
-                self.debug("Is Not allowed (not in dic) : {}".format(syscall),6)
+                self.debug("Not allowed (not in dic) : {}".format(syscall),6)
+        if self.callbackWarning:
+            self.callbackWarning(key)
         return False
 
     def callback(self, msg):
@@ -106,7 +109,7 @@ class ParseStrace(Thread):
                         self.debug("syscall exist in dictionary but pattern not match: syscall:{}, pattern:'{}', strace:{} ...".format(syscall, pattern, msg[0:50]),6)
                         return
                 if not self.checkIsAllowed(key):
-                    self.debug("It is not allowed : {}".format(key),4)
+                    self.debug("Not allowed : {}".format(key),4)
 
 
     def isRunning(self):
@@ -145,7 +148,10 @@ if __name__ == '__main__':
         "open" : [['^/dev/null$', '^O_RDWR$'],['^\.$', '^O_RDONLY$'],['^/proc/.*$', '^O_RDONLY$'],['^/dev/.*$', '^O_RDONLY$'], ['^/lib/.*$', '^O_RDONLY$'], ['^/usr/.*$', '^O_RDONLY$'], ['^/etc/.*$', '^O_RDONLY|O_RDWR$']]
     }
 
-    thread = ParseStrace(" ".join(sys.argv[1:]), profile, debug=True, loglevel=4)
+    def callbackWarning(l):
+        print "not allowed : ", l
+
+    thread = ParseStrace(" ".join(sys.argv[1:]), profile, callbackWarning=callbackWarning, debug=True, loglevel=4)
     print "Quit with CTRL+C"
 
     def signal_handler(signal, frame):
