@@ -126,7 +126,7 @@ class GenRulesSysCalls():
         return newoptimized
 
     def optimizes(self, l):
-        self.debug("len before optimizes : {}".format(len(l)), 4)
+        self.debug("len before optimization : {}".format(len(l)), 4)
         tmpl=self.removeDuplicatedRegex(l[:])
         self.debug("len after removeDuplicatedRegex : {}".format(len(tmpl)), 4)
         newoptimized=[]
@@ -167,7 +167,7 @@ class GenRulesSysCalls():
                     newoptimized.append(v)
                 else:
                     newoptimized.append(item)     
-        self.debug("len after optimizes : {}".format(len(newoptimized)), 4)
+        self.debug("len after optimization : {}".format(len(newoptimized)), 4)
         return newoptimized
 
     def exportProfile(self):

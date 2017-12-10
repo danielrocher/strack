@@ -51,6 +51,7 @@ class Main():
             time.sleep(1)
 
     def callbackWarning(self, l):
+        print "New call : {}".format(l)
         if self.genrules:
             self.genProf.addSyscall(l)
 
