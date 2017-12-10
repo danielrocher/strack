@@ -24,12 +24,12 @@ class ParseProfileFile():
             self.dic[key]=value
 
     def addtoDic(self, key, value):
-            currentvalue=self.dic[key]
-            if currentvalue==True:
-                return
-            elif type(currentvalue)==list and type(value)==list and len(value)!=0:   
-                currentvalue.append(value)
-                self.dic[key]=currentvalue
+        currentvalue=self.dic[key]
+        if currentvalue==True:
+            return
+        elif type(currentvalue)==list and type(value)==list and len(value)!=0:   
+            currentvalue.append(value)
+            self.dic[key]=currentvalue
 
     def parse(self):
         self.alreadyread=True
