@@ -107,8 +107,6 @@ class ParseStrace(Thread):
                         return
                 if not self.checkIsAllowed(key):
                     self.debug("It is not allowed : {}".format(key),4)
-                else:
-                    self.debug("It is allowed : {}".format(key),6)
 
 
     def isRunning(self):
