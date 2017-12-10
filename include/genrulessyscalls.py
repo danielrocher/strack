@@ -6,12 +6,11 @@
 
 
 import re
-from threading import Thread, Lock
+from threading import Lock
 
 
-class GenRulesSysCalls(Thread):
+class GenRulesSysCalls():
     def __init__(self, profile, debug=False, loglevel=1):
-        Thread.__init__(self)
         self.profile=profile
         self.newprofile={}
         self.cacheFullProfile=[]
@@ -20,7 +19,6 @@ class GenRulesSysCalls(Thread):
         self._debug=debug
         self.loglevel=loglevel
         self.importProfile()
-        print "FIN ============================" # TODO
 
     def removeRegEx(self, line):
         line=re.sub(r'(\^|\$)', '',line)
@@ -70,18 +68,74 @@ class GenRulesSysCalls(Thread):
             currentvalue.append(value)
             self.newprofile[key]=currentvalue
 
-     
-    def optimizes(self, l):
+    def removeDuplicatedRegex(self, l):
+        """see optimizes"""
+        def addToTodoRemove(l):
+            if l not in todoRemove:
+                todoRemove.append(l)
         tmpl=l[:]
         newoptimized=[]
-        print "==========================="
-        print "len before ", len(tmpl)
-        for item in l:
+        todoRemove=[]
+        
+        for item in tmpl:
+            if len(item)==1:
+                newoptimized.append(item)
+            elif len(item)==2:
+                found=False
+                for v in newoptimized:
+                    if len (v)!=2:
+                        continue
+                    if v[0]==item[0]:
+                        a=self.escapeRegEx(item[1])
+                        b=self.escapeRegEx(v[1])
+                        if re.match(r'{}'.format(a), '{}'.format(v[1])):
+                            self.debug("{} - '{}' can replace '{}'".format(item[0], a, b),5)
+                            addToTodoRemove(v)
+                            continue
+                        if re.match(r'{}'.format(b), '{}'.format(item[1])):
+                            self.debug("{} - '{}' can replace '{}'".format(item[0], b, a),5)
+                            addToTodoRemove(item)
+                            continue
+                if found==False:
+                    newoptimized.append(item)
+            elif len(item)==3:
+                found=False
+                for v in newoptimized:
+                    if len (v)!=3:
+                        continue
+                    if v[0]==item[0]:
+                        a1=self.escapeRegEx(item[1])
+                        b1=self.escapeRegEx(v[1])
+                        a2=self.escapeRegEx(item[2])
+                        b2=self.escapeRegEx(v[2])
+                        if re.match(r'{}'.format(a1), '{}'.format(v[1])) and re.match(r'{}'.format(a2), '{}'.format(v[2])) :
+                            self.debug("{} - '{},{}' can replace '{},{}'".format(item[0], a1, a2, v[1], v[2]),5)
+                            addToTodoRemove(v)
+                            continue
+                        if re.match(r'{}'.format(b1), '{}'.format(item[1])) and re.match(r'{}'.format(b2), '{}'.format(item[2])) :
+                            self.debug("{} - '{},{}' can replace '{},{}'".format(item[0], b1, b2, item[1], item[2]),5)
+                            addToTodoRemove(item)
+                            continue
+                if found==False:
+                    newoptimized.append(item)
+
+        for c in todoRemove:
+            if c in newoptimized:
+                newoptimized.remove(c)
+        
+        return newoptimized
+
+    def optimizes(self, l):
+        self.debug("len before optimizes : {}".format(len(l)), 4)
+        tmpl=self.removeDuplicatedRegex(l[:])
+        self.debug("len after removeDuplicatedRegex : {}".format(len(tmpl)), 4)
+        newoptimized=[]
+        for item in tmpl:
             if len(item)==1:
                 if item in newoptimized:
                     pass
                 newoptimized.append(item)
-            if len(item)==2:
+            elif len(item)==2:
                 found=False
                 itemexist=None
                 for v in newoptimized:
@@ -97,7 +151,7 @@ class GenRulesSysCalls(Thread):
                     newoptimized.append(v)
                 else:
                     newoptimized.append(item)
-            if len(item)==3:
+            elif len(item)==3:
                 found=False
                 itemexist=None
                 for v in newoptimized:
@@ -113,10 +167,8 @@ class GenRulesSysCalls(Thread):
                     newoptimized.append(v)
                 else:
                     newoptimized.append(item)     
-                        
-        print "len after ", len(newoptimized)
-        print "==========================="
-        return newoptimized 
+        self.debug("len after optimizes : {}".format(len(newoptimized)), 4)
+        return newoptimized
 
     def exportProfile(self):
         tmpFullProfile=self.optimizes(self.cacheFullProfile)
@@ -139,9 +191,6 @@ class GenRulesSysCalls(Thread):
         if self._debug and level<=self.loglevel:
             print(msg)
 
-    def run(self):
-        self.running=True
-
     def addSyscall(self, l):
         self.addToCacheIfnotExist(l)
 
@@ -150,16 +199,8 @@ class GenRulesSysCalls(Thread):
         self.exportProfile()
         return self.newprofile
 
-    def isRunning(self):
-        return self.running
-
-    def stop(self):
-        self.running=False
-
 
 if __name__ == '__main__':
-    import signal, time
-    global thread
     profile={
         "execve": True,
         "sendto" : True,
@@ -168,44 +209,32 @@ if __name__ == '__main__':
         "open" : [['^/lib/.*$', '^O_RDONLY$'],['^/etc/.*$', '^O_RDONLY$']]
     }
 
-    thread = GenRulesSysCalls(profile, debug=True, loglevel=7)
-    print "Quit with CTRL+C"
+    genrules = GenRulesSysCalls(profile, debug=True, loglevel=5)
+    genrules.addSyscall(['listen'])
+    genrules.addSyscall(['execve', '/bin/ls'])
+    genrules.addSyscall(['recvfrom'])
+    genrules.addSyscall(['open', '/etc/ld.so.cache', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ld.so.cache', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ld.so.cache', 'O_RDWR'])
+    genrules.addSyscall(['open', '/etc/ssh/sshd_config', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/gai.conf', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/nsswitch.conf', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/passwd', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssh/ssh_host_rsa_key', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssh/ssh_host_rsa_key.pub', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssh/ssh_host_dsa_key', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssh/ssh_host_dsa_key.pub', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssh/ssh_host_ecdsa_key', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssh/ssh_host_ecdsa_key.pub', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssh/ssh_host_ed25519_key', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssh/ssh_host_ed25519_key.pub', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssl/certs/ca-certificates.crt', 'O_RDONLY'])
+    genrules.addSyscall(['socket', 'SOCK_DGRAM'])
+    genrules.addSyscall(['socket', 'SOCK_STREAM'])
 
-    def signal_handler(signal, frame):
-        print "Wait. Stopping all ..."
-        global thread
-        print "before :", profile
-        print "after  :", thread.getProfile()
-        thread.stop()
-        thread.join()
-        thread=None
+    print "========\nbefore :", profile
+    res=genrules.getProfile()
+    print "========\nafter  :", res
 
-    signal.signal(signal.SIGINT, signal_handler)
-    thread.start()
-    
-    thread.addSyscall(['listen'])
-    thread.addSyscall(['execve', '/bin/ls'])
-    thread.addSyscall(['recvfrom'])
-    thread.addSyscall(['open', '/etc/ld.so.cache', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ld.so.cache', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ld.so.cache', 'O_RDWR'])
-    thread.addSyscall(['open', '/etc/ssh/sshd_config', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/gai.conf', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/nsswitch.conf', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/passwd', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ssh/ssh_host_rsa_key', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ssh/ssh_host_rsa_key.pub', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ssh/ssh_host_dsa_key', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ssh/ssh_host_dsa_key.pub', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ssh/ssh_host_ecdsa_key', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ssh/ssh_host_ecdsa_key.pub', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ssh/ssh_host_ed25519_key', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ssh/ssh_host_ed25519_key.pub', 'O_RDONLY'])
-    thread.addSyscall(['open', '/etc/ssl/certs/ca-certificates.crt', 'O_RDONLY'])
-    thread.addSyscall(['socket', 'SOCK_DGRAM'])
-    thread.addSyscall(['socket', 'SOCK_STREAM'])
-
-    while thread:
-       time.sleep(1)
 
 

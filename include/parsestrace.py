@@ -6,19 +6,20 @@
 
 
 import re, sys
-#import straceprocess
-import straceprocess_debug as straceprocess # TODO
+import straceprocess
+#import straceprocess_debug as straceprocess # TODO
 from threading import Thread, Lock
 
 
 class ParseStrace(Thread):
-    def __init__(self, pid, profile, callbackWarning=None, debug=False, loglevel=1):
+    def __init__(self, pid=None, program=None, profile={}, callbackWarning=None, debug=False, loglevel=1):
         Thread.__init__(self)
         self.pid=pid
+        self.program=program
         self.callbackWarning=callbackWarning
         self.syscallsDicPattern={
-            "execve"     : ".*\(\"(.*)\",.*",
-            "open"       : ".*\(\"(.*)\",.*(O_RDONLY|O_RDWR|O_WRONLY).*",
+            "execve"     : ".*\(\"(\S+)\",.*",
+            "open"       : ".*\(\"(\S+)\",.*(O_RDONLY|O_RDWR|O_WRONLY).*",
             "socket"     : ".*(SOCK_DGRAM|SOCK_RAW|SOCK_STREAM|SOCK_SEQPACKET).*",
             "connect"    : None,
             "accept"     : None,
@@ -120,7 +121,7 @@ class ParseStrace(Thread):
         if self.straceprocessthread :
             return
         syscalls=",".join(self.syscalls)
-        self.straceprocessthread = straceprocess.StraceProcess(self.pid, syscalls, self.callback)
+        self.straceprocessthread = straceprocess.StraceProcess(self.pid, self.program, syscalls, self.callback)
         self.straceprocessthread.start()
         self.debug("strace started", 0)
 
@@ -151,7 +152,7 @@ if __name__ == '__main__':
     def callbackWarning(l):
         print "not allowed : ", l
 
-    thread = ParseStrace(" ".join(sys.argv[1:]), profile, callbackWarning=callbackWarning, debug=True, loglevel=4)
+    thread = ParseStrace(program="/usr/sbin/arp", profile=profile, callbackWarning=callbackWarning, debug=True, loglevel=4)
     print "Quit with CTRL+C"
 
     def signal_handler(signal, frame):

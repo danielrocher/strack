@@ -9,9 +9,10 @@ import subprocess, re, sys
 from threading import Thread
 
 class StraceProcess(Thread):
-    def __init__(self, pid, syscalls, callback=None):
+    def __init__(self, pid=None, program=None, syscalls="", callback=None):
         Thread.__init__(self)
         self.pid=pid
+        self.program=program
         self.syscalls=syscalls
         self.process=None
         self.callback=callback
@@ -23,18 +24,18 @@ class StraceProcess(Thread):
     def run(self):
         if self.process :
             return
-        self.pid=re.sub("\s+", " ", self.pid).split(' ')
-        for x in self.pid:
-            try:
-                x=int(x)
-                continue
-            except:
-                print "Pid must be a number."
+
+        try:
+            args=None
+            if self.pid!=None:
+                args=["strace", "-f", "-q", "-p", self.pid, "-e", self.syscalls, "-y" ]
+            elif self.program!=None:
+                args=["strace", "-f", "-q", "-e", self.syscalls, "-y", self.program]
+            else:
+                print "PID or program is required !"
                 return
 
-        self.pid=",".join(self.pid)
-        try:
-            self.process = subprocess.Popen(["strace", "-f", "-q", "-p", self.pid, "-e", self.syscalls, "-y" ], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            self.process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             self.running=True
             for line in iter(self.process.stdout.readline, ''):
                 self.stdout(line.replace('\n', ''))
@@ -73,7 +74,7 @@ if __name__ == '__main__':
         thread=None
 
     syscalls="execve,open,socket,connect,accept,sendto,recvfrom,sendmsg,recvmsg,bind,listen,socketpair,accept4,recvmmsg,sendmmsg"
-    thread = StraceProcess(" ".join(sys.argv[1:]), syscalls, callback)
+    thread = StraceProcess(program="/usr/sbin/arp", syscalls=syscalls, callback=callback)
     print "Quit with CTRL+C"
 
     signal.signal(signal.SIGINT, signal_handler)
