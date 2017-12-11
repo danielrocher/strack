@@ -6,6 +6,11 @@
 
 
 import re
+import regex
+
+"""
+From a dictionary, allows to save rules to a file
+"""
 
 class GenerateProfile():
     def __init__(self, allowedSyscallDic):
@@ -13,16 +18,10 @@ class GenerateProfile():
         self.alreadyparse=False
         self.profileString=""
 
-    def removeRegEx(self, line):
-        line=re.sub(r'(\^|\$)', '',line)
-        line=line.replace("\\.",".").replace(".*","*")
-        return line
-
-
     def addToprofileString(self, line):
         if self.profileString!="":
             self.profileString+="\n"
-        self.profileString+=self.removeRegEx(line)
+        self.profileString+=regex.removeRegEx(line)
         
     def parse(self):
         self.alreadyparse=True
@@ -49,7 +48,7 @@ class GenerateProfile():
             for line in l:
                 f.write(line+'\n')
             f.close()
-        except:
+        except IOError:
             print "Impossible to write to file {}".format(filename)
             return False
         return True

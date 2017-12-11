@@ -19,11 +19,11 @@ from include.generateprofile import *
 class Main():
     def __init__(self):
         self.debug=False
-        self.argparse_thread=None
-        self.profile=False
-        self.genrules=False
-        self.genrules_filename=""
         self.leveldebug=0
+        self.straceparse_thread=None
+        self.profile=False
+        self.genrules_enabled=False
+        self.genrules_filename=""
         self.pid=None
         self.program=None
 
@@ -41,31 +41,31 @@ class Main():
                 sys.exit(1)
 
         self.genProf=None
-        if self.genrules:
+        if self.genrules_enabled:
             self.genProf=GenRulesSysCalls(dic, debug=self.debug, loglevel=self.leveldebug)
 
-        self.argparse_thread=ParseStrace(self.pid, self.program, dic, callbackWarning=self.callbackWarning, debug=self.debug, loglevel=self.leveldebug) # TODO Fixme
-        self.argparse_thread.start()
+        self.straceparse_thread=ParseStrace(self.pid, self.program, dic, callbackWarning=self.callbackWarning, debug=self.debug, loglevel=self.leveldebug)
+        self.straceparse_thread.start()
         
-        while self.argparse_thread:
+        while self.straceparse_thread:
             time.sleep(1)
 
     def callbackWarning(self, l):
         print "New call : {}".format(l)
-        if self.genrules:
+        if self.genrules_enabled:
             self.genProf.addSyscall(l)
 
 
     def signal_handler(self, signal, frame):
         self.printDebug("Wait. Stopping all ...")
-        self.argparse_thread.stop()
-        self.argparse_thread.join()
-        if self.genrules:
+        self.straceparse_thread.stop()
+        self.straceparse_thread.join()
+        if self.genrules_enabled:
             # write new profile in file
             dic=self.genProf.getProfile()
             prf=GenerateProfile(dic)
             prf.writeToFilePrf(self.genrules_filename)
-        self.argparse_thread=None
+        self.straceparse_thread=None
 
     def printDebug(self, msg):
         if self.debug:
@@ -74,22 +74,17 @@ class Main():
     def parseArgs(self):
         # Parse Args
         parser = argparse.ArgumentParser()
-        parser.add_argument("-v", "--version", help="show version", action="store_true")
+        parser.add_argument("-v", "--version", help="show version", action='version', version='%(prog)s version : {version}'.format(version=__version__))
         parser.add_argument("-p", "--profile", help="profile file", metavar="PROFIL_FILENAME")
         parser.add_argument("-o", "--ouput", help="generate new profile with rules", metavar="OUTPUT_FILENAME")
         parser.add_argument("-d", "--debug", help="Debug", action="store_true")
         parser.add_argument("-l", "--leveldebug", help="level for debug",type=int, default=0)
-        parser.add_argument("TRACE", help="A Pid number (ex. 545) OR PidName (ex. sshd) OR start program to trace (ex. /usr/sbin/sshd). Pid and PidName must be running")
+        parser.add_argument("TRACE", help="A Pid number (ex. 545) OR PidName (ex. sshd) OR start program to trace (ex. /usr/sbin/sshd)")
         args=parser.parse_args()
 
         if (not args.debug and args.leveldebug!=0):
             parser.error('--leveldebug (-l) require --debug (-d) !')
 
-
-        appName=sys.argv[0]
-        if args.version==True:
-            print ("{0} version : {1}".format(appName, __version__))
-            sys.exit()
         if args.debug==True:
             self.debug=True
             self.leveldebug=args.leveldebug
@@ -99,7 +94,7 @@ class Main():
 
         if args.ouput:
             self.genrules_filename=args.ouput  
-            self.genrules=True 
+            self.genrules_enabled=True 
 
         # test if a number
         try:

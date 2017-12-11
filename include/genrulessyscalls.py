@@ -6,8 +6,13 @@
 
 
 import re
+import regex
 from threading import Lock
 
+"""
+Create rules automatically, from system calls.
+Is able to optimize some rules.
+"""
 
 class GenRulesSysCalls():
     def __init__(self, profile, debug=False, loglevel=1):
@@ -15,21 +20,9 @@ class GenRulesSysCalls():
         self.newprofile={}
         self.cacheFullProfile=[]
         self.lock_cachefullprofile = Lock()
-        self.running=False
         self._debug=debug
         self.loglevel=loglevel
         self.importProfile()
-
-    def removeRegEx(self, line):
-        line=re.sub(r'(\^|\$)', '',line)
-        line=line.replace("\\.",".").replace(".*","*")
-        return line
-
-    def escapeRegEx(self, line):
-        line=line.replace('.', '\\.').replace('*', '.*')
-        line="^"+line+"$"
-        return line
-
 
 
     def addToCacheIfnotExist(self, value):
@@ -48,7 +41,7 @@ class GenRulesSysCalls():
                 for v in value:
                     item=[key]
                     for c in v:
-                        item.append(self.removeRegEx(c))
+                        item.append(regex.removeRegEx(c))
                     self.addToCacheIfnotExist(item)
             elif value==True:
                 self.addToCacheIfnotExist([key])
@@ -86,8 +79,8 @@ class GenRulesSysCalls():
                     if len (v)!=2:
                         continue
                     if v[0]==item[0]:
-                        a=self.escapeRegEx(item[1])
-                        b=self.escapeRegEx(v[1])
+                        a=regex.escapeRegEx(item[1])
+                        b=regex.escapeRegEx(v[1])
                         if re.match(r'{}'.format(a), '{}'.format(v[1])):
                             self.debug("{} - '{}' can replace '{}'".format(item[0], a, b),5)
                             addToTodoRemove(v)
@@ -104,10 +97,10 @@ class GenRulesSysCalls():
                     if len (v)!=3:
                         continue
                     if v[0]==item[0]:
-                        a1=self.escapeRegEx(item[1])
-                        b1=self.escapeRegEx(v[1])
-                        a2=self.escapeRegEx(item[2])
-                        b2=self.escapeRegEx(v[2])
+                        a1=regex.escapeRegEx(item[1])
+                        b1=regex.escapeRegEx(v[1])
+                        a2=regex.escapeRegEx(item[2])
+                        b2=regex.escapeRegEx(v[2])
                         if re.match(r'{}'.format(a1), '{}'.format(v[1])) and re.match(r'{}'.format(a2), '{}'.format(v[2])) :
                             self.debug("{} - '{},{}' can replace '{},{}'".format(item[0], a1, a2, v[1], v[2]),5)
                             addToTodoRemove(v)
@@ -182,7 +175,7 @@ class GenRulesSysCalls():
                 self.createKeyIfnotExist(syscall, [])
             value=[]
             for v in item[1:]:
-                v=self.escapeRegEx(v.strip())
+                v=regex.escapeRegEx(v.strip())
                 value.append(v)
             self.addtoDic(syscall, value)
                 

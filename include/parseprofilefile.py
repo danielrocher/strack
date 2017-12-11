@@ -6,18 +6,17 @@
 
 
 import re
+import regex
 
+"""
+Get rules, from file.
+"""
 
 class ParseProfileFile():
     def __init__(self, filename):
         self.filename=filename
         self.dic={}
         self.alreadyread=False
-
-    def escapeRegEx(self, line):
-        line=line.replace('.', '\\.').replace('*', '.*')
-        line="^"+line+"$"
-        return line
 
     def createKeyIfnotExist(self, key, value):
         if not key in self.dic:
@@ -49,10 +48,10 @@ class ParseProfileFile():
 
                     value=[]
                     for v in l[1:]:
-                        v=self.escapeRegEx(v.strip())
+                        v=regex.escapeRegEx(v.strip())
                         value.append(v)
                     self.addtoDic(key, value)
-        except:
+        except IOError:
             print "Impossible to read profile file !"
             return False
         return True
