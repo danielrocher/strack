@@ -69,8 +69,6 @@ class ParseStrace(Thread):
                 value=self.allowedSyscallDic[syscall]
                 if value == True:
                     return True
-                elif value == False:
-                    return False
                 elif type(value) == list:
                     toCheck=key[1:]
                     for it in value:

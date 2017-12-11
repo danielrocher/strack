@@ -63,14 +63,13 @@ class GenRulesSysCalls():
 
     def removeDuplicatedRegex(self, l):
         """see optimizes"""
-        def addToTodoRemove(l):
-            if l not in todoRemove:
-                todoRemove.append(l)
-        tmpl=l[:]
+        def addToTodoRemove(rm):
+            if rm not in todoRemove:
+                todoRemove.append(rm)
         newoptimized=[]
         todoRemove=[]
         
-        for item in tmpl:
+        for item in l:
             if len(item)==1:
                 newoptimized.append(item)
             elif len(item)==2:
@@ -112,15 +111,41 @@ class GenRulesSysCalls():
                 if found==False:
                     newoptimized.append(item)
 
+        newoptimized=self.removeDuplicate(newoptimized)
         for c in todoRemove:
             if c in newoptimized:
                 newoptimized.remove(c)
         
         return newoptimized
 
+    def removeDuplicate(self, l):
+        newlist=[]
+        for i in l:
+            if i not in newlist:
+                newlist.append(i)
+        return newlist
+    
+    def reducePathSize(self, l):
+        for item in l:
+            if item[0]=="open" and len(item)>2 and item[2]=="O_RDONLY":
+                path=item[1].split("/")
+                if len(path)>2 and (path[1]=='proc' or path[1]=='sys'):
+                    path[2]="*"
+                    path="/".join(path[0:3])
+                    item[1]=path
+                elif len(path)>3:
+                    path[3]="*"
+                    path="/".join(path[0:4])
+                    item[1]=path
+                
+
+        return self.removeDuplicate(l)
+    
     def optimizes(self, l):
         self.debug("len before optimization : {}".format(len(l)), 4)
-        tmpl=self.removeDuplicatedRegex(l[:])
+        tmpl=self.reducePathSize(l)
+        self.debug("len after reducePathSize : {}".format(len(tmpl)), 4)
+        tmpl=self.removeDuplicatedRegex(tmpl)
         self.debug("len after removeDuplicatedRegex : {}".format(len(tmpl)), 4)
         newoptimized=[]
         for item in tmpl:
@@ -129,35 +154,31 @@ class GenRulesSysCalls():
                     pass
                 newoptimized.append(item)
             elif len(item)==2:
-                found=False
                 itemexist=None
                 for v in newoptimized:
                     if len(v)==2:
                         if v[0]==item[0]:
                             if len(v[1])<30:
-                                found=True
                                 itemexist=v
                             break
-                if found==True:
-                    newoptimized.remove(v)
-                    v=[v[0], v[1]+"|"+item[1] ]
-                    newoptimized.append(v)
+                if itemexist!=None and item[1] not in itemexist[1] and itemexist[1] not in item[1]:
+                    newoptimized.remove(itemexist)
+                    itemexist=[itemexist[0], itemexist[1]+"|"+item[1] ]
+                    newoptimized.append(itemexist)
                 else:
                     newoptimized.append(item)
             elif len(item)==3:
-                found=False
                 itemexist=None
                 for v in newoptimized:
                     if len(v)==3:
                         if v[0]==item[0] and v[1]==item[1]:
                             if len(v[2])<30:
-                                found=True
                                 itemexist=v
                             break
-                if found==True:
-                    newoptimized.remove(v)
-                    v=[v[0], v[1], v[2]+"|"+item[2] ]
-                    newoptimized.append(v)
+                if itemexist!=None and item[2] not in itemexist[2] and itemexist[2] not in item[2]:
+                    newoptimized.remove(itemexist)
+                    itemexist=[itemexist[0], itemexist[1], itemexist[2]+"|"+item[2] ]
+                    newoptimized.append(itemexist)
                 else:
                     newoptimized.append(item)     
         self.debug("len after optimization : {}".format(len(newoptimized)), 4)
@@ -199,7 +220,7 @@ if __name__ == '__main__':
         "sendto" : True,
         "connect" : True,
         "listen" : True,
-        "open" : [['^/lib/.*$', '^O_RDONLY$'],['^/etc/.*$', '^O_RDONLY$']]
+        "open" : [['^/lib/.*$', '^O_RDONLY$']]
     }
 
     genrules = GenRulesSysCalls(profile, debug=True, loglevel=5)
@@ -221,9 +242,11 @@ if __name__ == '__main__':
     genrules.addSyscall(['open', '/etc/ssh/ssh_host_ecdsa_key.pub', 'O_RDONLY'])
     genrules.addSyscall(['open', '/etc/ssh/ssh_host_ed25519_key', 'O_RDONLY'])
     genrules.addSyscall(['open', '/etc/ssh/ssh_host_ed25519_key.pub', 'O_RDONLY'])
+    genrules.addSyscall(['open', '/etc/ssh/ssh_host_ed25519_key.pub', 'O_RDWR'])
     genrules.addSyscall(['open', '/etc/ssl/certs/ca-certificates.crt', 'O_RDONLY'])
     genrules.addSyscall(['socket', 'SOCK_DGRAM'])
     genrules.addSyscall(['socket', 'SOCK_STREAM'])
+    genrules.addSyscall(['open' , '/proc/4355/fd' , 'O_RDONLY'])
 
     print "========\nbefore :", profile
     res=genrules.getProfile()
