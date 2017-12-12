@@ -23,7 +23,6 @@ class Main():
         self.straceparse_thread=None
         self.profile=False
         self.genrules_enabled=False
-        self.genrules_filename=""
         self.pid=None
         self.program=None
 
@@ -35,10 +34,12 @@ class Main():
 
         dic={}
         if self.profile!=False:
-            prf=ParseProfileFile(self.profile)
-            dic=prf.getDic()
-            if dic==None:
-                sys.exit(1)
+            if os.path.isfile(self.profile) or not self.genrules_enabled:
+                prf=ParseProfileFile(self.profile)
+                dic=prf.getDic()
+                if dic==None:
+                    sys.exit(1)
+
 
         self.genProf=None
         if self.genrules_enabled:
@@ -64,7 +65,7 @@ class Main():
             # write new profile in file
             dic=self.genProf.getProfile()
             prf=GenerateProfile(dic)
-            prf.writeToFilePrf(self.genrules_filename)
+            prf.writeToFilePrf(self.profile)
         self.straceparse_thread=None
 
     def printDebug(self, msg):
@@ -76,7 +77,7 @@ class Main():
         parser = argparse.ArgumentParser()
         parser.add_argument("-v", "--version", help="show version", action='version', version='%(prog)s version : {version}'.format(version=__version__))
         parser.add_argument("-p", "--profile", help="profile file", metavar="PROFIL_FILENAME")
-        parser.add_argument("-o", "--ouput", help="generate new profile with rules", metavar="OUTPUT_FILENAME")
+        parser.add_argument("-a", "--addrules", help="add new rules in profile file", action="store_true")
         parser.add_argument("-d", "--debug", help="Debug", action="store_true")
         parser.add_argument("-l", "--leveldebug", help="level for debug",type=int, default=0)
         parser.add_argument("TRACE", help="A Pid number (ex. 545) OR PidName (ex. sshd) OR start program to trace (ex. /usr/sbin/sshd)")
@@ -85,6 +86,9 @@ class Main():
         if (not args.debug and args.leveldebug!=0):
             parser.error('--leveldebug (-l) require --debug (-d) !')
 
+        if (args.addrules and not args.profile):
+            parser.error('--addrules (-a) require --profile (-p) !')
+            
         if args.debug==True:
             self.debug=True
             self.leveldebug=args.leveldebug
@@ -92,8 +96,7 @@ class Main():
         if args.profile:
             self.profile=args.profile
 
-        if args.ouput:
-            self.genrules_filename=args.ouput  
+        if args.addrules: 
             self.genrules_enabled=True 
 
         # test if a number

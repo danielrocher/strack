@@ -129,7 +129,7 @@ class GenRulesSysCalls():
         for item in l:
             if item[0]=="open" and len(item)>2 and item[2]=="O_RDONLY":
                 path=item[1].split("/")
-                if len(path)>2 and (path[1]=='proc' or path[1]=='sys'):
+                if len(path)>2 and (path[1]=='proc' or path[1]=='sys'or path[1]=='run'):
                     path[2]="*"
                     path="/".join(path[0:3])
                     item[1]=path
@@ -155,12 +155,13 @@ class GenRulesSysCalls():
                 newoptimized.append(item)
             elif len(item)==2:
                 itemexist=None
-                for v in newoptimized:
-                    if len(v)==2:
-                        if v[0]==item[0]:
-                            if len(v[1])<30:
-                                itemexist=v
-                            break
+                if not '*' in item[1] and not '/' in item[1]:
+                    for v in newoptimized:
+                        if len(v)==2:
+                            if v[0]==item[0]:
+                                if len(v[1])<30:
+                                    itemexist=v
+                                    break
                 if itemexist!=None and item[1] not in itemexist[1] and itemexist[1] not in item[1]:
                     newoptimized.remove(itemexist)
                     itemexist=[itemexist[0], itemexist[1]+"|"+item[1] ]
@@ -169,12 +170,13 @@ class GenRulesSysCalls():
                     newoptimized.append(item)
             elif len(item)==3:
                 itemexist=None
-                for v in newoptimized:
-                    if len(v)==3:
-                        if v[0]==item[0] and v[1]==item[1]:
-                            if len(v[2])<30:
-                                itemexist=v
-                            break
+                if not '*' in item[2] and not '/' in item[2]:
+                    for v in newoptimized:
+                        if len(v)==3:
+                            if v[0]==item[0] and v[1]==item[1]:
+                                if len(v[2])<30:
+                                    itemexist=v
+                                    break
                 if itemexist!=None and item[2] not in itemexist[2] and itemexist[2] not in item[2]:
                     newoptimized.remove(itemexist)
                     itemexist=[itemexist[0], itemexist[1], itemexist[2]+"|"+item[2] ]
