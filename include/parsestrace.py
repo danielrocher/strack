@@ -7,7 +7,6 @@
 
 import re, sys
 import straceprocess
-#import straceprocess_debug as straceprocess # TODO
 from threading import Thread, Lock
 
 
@@ -122,6 +121,7 @@ class ParseStrace(Thread):
         self.straceprocessthread = straceprocess.StraceProcess(self.pid, self.program, syscalls, self.callback)
         self.straceprocessthread.start()
         self.debug("strace started", 0)
+        self.straceprocessthread.join()
 
     def stop(self):
         self.debug("Stopping strace ...", 0)

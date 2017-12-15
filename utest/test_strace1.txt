@@ -1,0 +1,7 @@
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+open("/etc/ld.so.cache", O_RDWR|O_CLOEXEC) = 3
+execve("./fork_exec", ["./fork_exec"], [/* 64 vars */]) = 0
+bind(4, {sa_family=AF_INET, sin_port=htons(8888), sin_addr=inet_addr("0.0.0.0")}, 16) = 0
+socket(PF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
+connect(3, {sa_family=AF_INET, sin_port=htons(22), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+

@@ -1,0 +1,287 @@
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+open("/etc/ld.so.cache", O_RDWR|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libwrap.so.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libaudit.so.1", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libpam.so.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libsystemd.so.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libcrypto.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libutil.so.1", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libcrypt.so.1", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/libkrb5.so.3", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libcom_err.so.2", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libnsl.so.1", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libpcre.so.3", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/librt.so.1", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/liblzma.so.5", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libgcrypt.so.20", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/libk5crypto.so.3", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/libkrb5support.so.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libkeyutils.so.1", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libresolv.so.2", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libgpg-error.so.0", O_RDONLY|O_CLOEXEC) = 3
+open("/proc/filesystems", O_RDONLY)     = 3
+open("/dev/null", O_RDWR)               = 3
+open("/proc/560/fd", O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 3
+open("/usr/lib/ssl/openssl.cnf", O_RDONLY) = 3
+open("/etc/ssh/sshd_config", O_RDONLY)  = 3
+open("/dev/urandom", O_RDONLY|O_NOCTTY|O_NONBLOCK) = 3
+open("/etc/gai.conf", O_RDONLY|O_CLOEXEC) = 3
+socket(PF_NETLINK, SOCK_RAW, NETLINK_ROUTE) = 3
+bind(3, {sa_family=AF_NETLINK, pid=0, groups=00000000}, 12) = 0
+sendto(3, "\24\0\0\0\26\0\1\3\257\332*Z\0\0\0\0\0\0\0\0", 20, 0, {sa_family=AF_NETLINK, pid=0, groups=00000000}, 12) = 20
+recvmsg(3, {msg_name(12)={sa_family=AF_NETLINK, pid=0, groups=00000000}, msg_iov(1)=[{"L\0\0\0\24\0\2\0\257\332*Z0\2\0\0\2\10\200\376\1\0\0\0\10\0\1\0\177\0\0\1"..., 4096}], msg_controllen=0, msg_flags=0}, 0) = 164
+recvmsg(3, {msg_name(12)={sa_family=AF_NETLINK, pid=0, groups=00000000}, msg_iov(1)=[{"H\0\0\0\24\0\2\0\257\332*Z0\2\0\0\n@\200\375\2\0\0\0\24\0\1\0\376\200\0\0"..., 4096}], msg_controllen=0, msg_flags=0}, 0) = 72
+recvmsg(3, {msg_name(12)={sa_family=AF_NETLINK, pid=0, groups=00000000}, msg_iov(1)=[{"\24\0\0\0\3\0\2\0\257\332*Z0\2\0\0\0\0\0\0", 4096}], msg_controllen=0, msg_flags=0}, 0) = 20
+socket(PF_LOCAL, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 4
+connect(4, {sa_family=AF_LOCAL, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+socket(PF_INET6, SOCK_DGRAM, IPPROTO_IP) = 3
+connect(3, {sa_family=AF_INET6, sin6_port=htons(22), inet_pton(AF_INET6, "::", &sin6_addr), sin6_flowinfo=0, sin6_scope_id=0}, 28) = -1 ENETUNREACH (Network is unreachable)
+connect(3, {sa_family=AF_UNSPEC, sa_data="\0\0\0\0\0\0\0\0\0\0\0\0\0\0"}, 16) = 0
+connect(3, {sa_family=AF_INET, sin_port=htons(22), sin_addr=inet_addr("0.0.0.0")}, 16) = 0
+socket(PF_LOCAL, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 3
+connect(3, {sa_family=AF_LOCAL, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+socket(PF_LOCAL, SOCK_STREAM|SOCK_CLOEXEC|SOCK_NONBLOCK, 0) = 3
+connect(3, {sa_family=AF_LOCAL, sun_path="/var/run/nscd/socket"}, 110) = -1 ENOENT (No such file or directory)
+open("/etc/nsswitch.conf", O_RDONLY|O_CLOEXEC) = 3
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libnss_compat.so.2", O_RDONLY|O_CLOEXEC) = 3
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libnss_nis.so.2", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libnss_files.so.2", O_RDONLY|O_CLOEXEC) = 3
+open("/etc/passwd", O_RDONLY|O_CLOEXEC) = 3
+open("/etc/ssh/ssh_host_rsa_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_rsa_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_rsa_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_rsa_key.pub", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_dsa_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_dsa_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_dsa_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_dsa_key.pub", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_ecdsa_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_ecdsa_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_ecdsa_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_ecdsa_key.pub", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_ed25519_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_ed25519_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_ed25519_key", O_RDONLY) = 3
+open("/etc/ssh/ssh_host_ed25519_key.pub", O_RDONLY) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libssl.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libcrypto.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/libpcap.so.0.8", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/liblua5.2.so.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+socket(PF_INET6, SOCK_STREAM, IPPROTO_TCP) = 3
+bind(3, {sa_family=AF_INET6, sin6_port=htons(8888), inet_pton(AF_INET6, "::", &sin6_addr), sin6_flowinfo=0, sin6_scope_id=0}, 28) = 0
+listen(3, 10)                           = 0
+socket(PF_INET, SOCK_STREAM, IPPROTO_TCP) = 4
+bind(4, {sa_family=AF_INET, sin_port=htons(8888), sin_addr=inet_addr("0.0.0.0")}, 16) = 0
+listen(4, 10)                           = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libssl.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libcrypto.so.1.0.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/libpcap.so.0.8", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/liblua5.2.so.0", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+open("/dev/urandom", O_RDONLY|O_NOCTTY|O_NONBLOCK) = 3
+open("/dev/urandom", O_RDONLY)          = 3
+open("/usr/lib/ssl/cert.pem", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/etc/ssl/certs/ca-certificates.crt", O_RDONLY) = 3
+socket(PF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
+connect(3, {sa_family=AF_INET, sin_port=htons(22), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 EINPROGRESS (Operation now in progress)
+recvfrom(3, "SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ub"..., 8192, 0, 0x7ffc1acc1370, [0]) = 41
+SSH-2.0-OpenSSH_7.2p2 Ubuntu-4ubuntu2.2
+execve("./fork_exec", ["./fork_exec"], [/* 64 vars */]) = 0
+brk(NULL)                               = 0x20b4000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fadada35000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=117060, ...}) = 0
+mmap(NULL, 117060, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fadada18000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\t\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1868984, ...}) = 0
+mmap(NULL, 3971488, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fadad448000
+mprotect(0x7fadad608000, 2097152, PROT_NONE) = 0
+mmap(0x7fadad808000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1c0000) = 0x7fadad808000
+mmap(0x7fadad80e000, 14752, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fadad80e000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fadada17000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fadada16000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fadada15000
+arch_prctl(ARCH_SET_FS, 0x7fadada16700) = 0
+mprotect(0x7fadad808000, 16384, PROT_READ) = 0
+mprotect(0x600000, 4096, PROT_READ)     = 0
+mprotect(0x7fadada37000, 4096, PROT_READ) = 0
+munmap(0x7fadada18000, 117060)          = 0
+clone(child_stack=0, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x7fadada169d0) = 3105
+getpid(strace: Process 3105 attached
+)                                = 3104
+[pid  3104] fstat(1,  <unfinished ...>
+[pid  3105] fstat(1,  <unfinished ...>
+[pid  3104] <... fstat resumed> {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 6), ...}) = 0
+[pid  3105] <... fstat resumed> {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 6), ...}) = 0
+[pid  3104] brk(NULL)                   = 0x20b4000
+[pid  3105] brk(NULL <unfinished ...>
+[pid  3104] brk(0x20d5000 <unfinished ...>
+[pid  3105] <... brk resumed> )         = 0x20b4000
+[pid  3105] brk(0x20d5000 <unfinished ...>
+[pid  3104] <... brk resumed> )         = 0x20d5000
+[pid  3105] <... brk resumed> )         = 0x20d5000
+[pid  3104] write(1, "I'm the parent process, pid=3104"..., 33 <unfinished ...>
+[pid  3105] write(1, "I'm the child process, pid=3105\n", 32I'm the parent process, pid=3104
+ <unfinished ...>
+[pid  3104] <... write resumed> )       = 33
+I'm the child process, pid=3105
+[pid  3104] wait4(-1,  <unfinished ...>
+[pid  3105] <... write resumed> )       = 32
+[pid  3105] execve("/bin/ls", ["/bin/ls"], [/* 0 vars */]) = 0
+[pid  3105] execve("/bin/ls", ["/bin/ls"], [/* 0 vars */]) = 0
+[pid  3105] brk(NULL)                   = 0x1021000
+[pid  3105] access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+[pid  3105] mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f70fe97f000
+[pid  3105] access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+[pid  3105] open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+[pid  3105] fstat(3, {st_mode=S_IFREG|0644, st_size=117060, ...}) = 0
+[pid  3105] mmap(NULL, 117060, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f70fe962000
+[pid  3105] close(3)                    = 0
+[pid  3105] access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+[pid  3105] open("/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+[pid  3105] read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260Z\0\0\0\0\0\0"..., 832) = 832
+[pid  3105] fstat(3, {st_mode=S_IFREG|0644, st_size=130224, ...}) = 0
+[pid  3105] mmap(NULL, 2234080, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f70fe53a000
+[pid  3105] mprotect(0x7f70fe559000, 2093056, PROT_NONE) = 0
+[pid  3105] mmap(0x7f70fe758000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e000) = 0x7f70fe758000
+[pid  3105] mmap(0x7f70fe75a000, 5856, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f70fe75a000
+[pid  3105] close(3)                    = 0
+[pid  3105] access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+[pid  3105] open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+[pid  3105] read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\t\2\0\0\0\0\0"..., 832) = 832
+[pid  3105] fstat(3, {st_mode=S_IFREG|0755, st_size=1868984, ...}) = 0
+[pid  3105] mmap(NULL, 3971488, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f70fe170000
+[pid  3105] mprotect(0x7f70fe330000, 2097152, PROT_NONE) = 0
+[pid  3105] mmap(0x7f70fe530000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1c0000) = 0x7f70fe530000
+[pid  3105] mmap(0x7f70fe536000, 14752, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f70fe536000
+[pid  3105] close(3)                    = 0
+[pid  3105] access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+[pid  3105] open("/lib/x86_64-linux-gnu/libpcre.so.3", O_RDONLY|O_CLOEXEC) = 3
+[pid  3105] read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0000\25\0\0\0\0\0\0"..., 832) = 832
+[pid  3105] fstat(3, {st_mode=S_IFREG|0644, st_size=456632, ...}) = 0
+[pid  3105] mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f70fe961000
+[pid  3105] mmap(NULL, 2552072, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f70fdf00000
+[pid  3105] mprotect(0x7f70fdf6e000, 2097152, PROT_NONE) = 0
+[pid  3105] mmap(0x7f70fe16e000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6e000) = 0x7f70fe16e000
+[pid  3105] close(3)                    = 0
+[pid  3105] access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+[pid  3105] open("/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+[pid  3105] read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\240\r\0\0\0\0\0\0"..., 832) = 832
+[pid  3105] fstat(3, {st_mode=S_IFREG|0644, st_size=14608, ...}) = 0
+[pid  3105] mmap(NULL, 2109680, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f70fdcfc000
+[pid  3105] mprotect(0x7f70fdcff000, 2093056, PROT_NONE) = 0
+[pid  3105] mmap(0x7f70fdefe000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f70fdefe000
+[pid  3105] close(3)                    = 0
+[pid  3105] access("/etc/ld.so.nohwcap", F_OK) = -1 ENOENT (No such file or directory)
+[pid  3105] open("/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+[pid  3105] read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260`\0\0\0\0\0\0"..., 832) = 832
+[pid  3105] fstat(3, {st_mode=S_IFREG|0755, st_size=138696, ...}) = 0
+[pid  3105] mmap(NULL, 2212904, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f70fdadf000
+[pid  3105] mprotect(0x7f70fdaf7000, 2093056, PROT_NONE) = 0
+[pid  3105] mmap(0x7f70fdcf6000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17000) = 0x7f70fdcf6000
+[pid  3105] mmap(0x7f70fdcf8000, 13352, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f70fdcf8000
+[pid  3105] close(3)                    = 0
+[pid  3105] mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f70fe960000
+[pid  3105] mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f70fe95e000
+[pid  3105] arch_prctl(ARCH_SET_FS, 0x7f70fe95e800) = 0
+[pid  3105] mprotect(0x7f70fe530000, 16384, PROT_READ) = 0
+[pid  3105] mprotect(0x7f70fdcf6000, 4096, PROT_READ) = 0
+[pid  3105] mprotect(0x7f70fdefe000, 4096, PROT_READ) = 0
+[pid  3105] mprotect(0x7f70fe16e000, 4096, PROT_READ) = 0
+[pid  3105] mprotect(0x7f70fe758000, 4096, PROT_READ) = 0
+[pid  3105] mprotect(0x61d000, 4096, PROT_READ) = 0
+[pid  3105] mprotect(0x7f70fe981000, 4096, PROT_READ) = 0
+[pid  3105] munmap(0x7f70fe962000, 117060) = 0
+[pid  3105] set_tid_address(0x7f70fe95ead0) = 3105
+[pid  3105] set_robust_list(0x7f70fe95eae0, 24) = 0
+[pid  3105] rt_sigaction(SIGRTMIN, {0x7f70fdae4b50, [], SA_RESTORER|SA_SIGINFO, 0x7f70fdaf0390}, NULL, 8) = 0
+[pid  3105] rt_sigaction(SIGRT_1, {0x7f70fdae4be0, [], SA_RESTORER|SA_RESTART|SA_SIGINFO, 0x7f70fdaf0390}, NULL, 8) = 0
+[pid  3105] rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+[pid  3105] getrlimit(RLIMIT_STACK, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+[pid  3105] statfs("/sys/fs/selinux", 0x7ffe1fa95da0) = -1 ENOENT (No such file or directory)
+[pid  3105] statfs("/selinux", 0x7ffe1fa95da0) = -1 ENOENT (No such file or directory)
+[pid  3105] brk(NULL)                   = 0x1021000
+[pid  3105] brk(0x1042000)              = 0x1042000
+[pid  3105] open("/proc/filesystems", O_RDONLY) = 3
+[pid  3105] fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+[pid  3105] read(3, "nodev\tsysfs\nnodev\trootfs\nnodev\tr"..., 1024) = 437
+[pid  3105] read(3, "", 1024)           = 0
+[pid  3105] close(3)                    = 0
+[pid  3105] ioctl(1, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+[pid  3105] ioctl(1, TIOCGWINSZ, {ws_row=46, ws_col=191, ws_xpixel=0, ws_ypixel=0}) = 0
+[pid  3105] open(".", O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 3
+[pid  3105] fstat(3, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+[pid  3105] getdents(3, /* 17 entries */, 32768) = 600
+[pid  3105] getdents(3, /* 0 entries */, 32768) = 0
+[pid  3105] close(3)                    = 0
+[pid  3105] fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 6), ...}) = 0
+

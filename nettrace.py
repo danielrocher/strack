@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
-# Portions created by the Initial Developer are Copyright (C) 2016
+# Portions created by the Initial Developer are Copyright (C) 2017
 
 
 __version__="0.4"
