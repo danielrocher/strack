@@ -57,9 +57,10 @@ class GenRulesSysCalls():
         currentvalue=self.newprofile[key]
         if currentvalue==True:
             return
-        elif type(currentvalue)==list and type(value)==list and len(value)!=0:   
-            currentvalue.append(value)
-            self.newprofile[key]=currentvalue
+        elif type(currentvalue)==list and type(value)==list and len(value)!=0:
+            if value not in currentvalue:
+                currentvalue.append(value)
+                self.newprofile[key]=currentvalue
 
     def removeDuplicatedRegex(self, l):
         """see optimizes"""
@@ -70,6 +71,8 @@ class GenRulesSysCalls():
         todoRemove=[]
         
         for item in l:
+            if item in newoptimized:
+                continue
             if len(item)==1:
                 newoptimized.append(item)
             elif len(item)==2:
@@ -188,7 +191,7 @@ class GenRulesSysCalls():
 
     def exportProfile(self):
         tmpFullProfile=self.optimizes(self.cacheFullProfile)
-        
+        self.newprofile={}
         for item in tmpFullProfile:
             syscall=item[0]
             value=item[1:]

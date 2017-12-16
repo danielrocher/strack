@@ -26,9 +26,10 @@ class ParseProfileFile():
         currentvalue=self.dic[key]
         if currentvalue==True:
             return
-        elif type(currentvalue)==list and type(value)==list and len(value)!=0:   
-            currentvalue.append(value)
-            self.dic[key]=currentvalue
+        elif type(currentvalue)==list and type(value)==list and len(value)!=0:
+            if value not in currentvalue: 
+                currentvalue.append(value)
+                self.dic[key]=currentvalue
 
     def parse(self):
         self.alreadyread=True
