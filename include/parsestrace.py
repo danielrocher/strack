@@ -137,14 +137,7 @@ if __name__ == '__main__':
     import signal, time
     global thread
     profile={
-        "execve": True,
-        "bind" : True,
-        "sendto" : True,
-        "connect" : True,
-        "listen" : True,
-        "recvfrom" : True,
-        "socket": [["^SOCK_RAW|SOCK_STREAM|SOCK_DGRAM$"]],
-        "open" : [['^/dev/null$', '^O_RDWR$'],['^\.$', '^O_RDONLY$'],['^/proc/.*$', '^O_RDONLY$'],['^/dev/.*$', '^O_RDONLY$'], ['^/lib/.*$', '^O_RDONLY$'], ['^/usr/.*$', '^O_RDONLY$'], ['^/etc/.*$', '^O_RDONLY|O_RDWR$']]
+        "execve": True
     }
 
     def callbackWarning(l):
