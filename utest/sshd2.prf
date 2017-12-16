@@ -1,0 +1,4 @@
+execve;/bin/ls
+execve;/bin/cat
+execve
+

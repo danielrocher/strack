@@ -122,12 +122,9 @@ class GenerateProfileTest(unittest.TestCase):
 
 
 class ParseProfileFileTest(unittest.TestCase):
-    def setUp(self):
-        pass
-
     def test_classParseProfileFileTest(self):
         profile={
-            "execve": True,
+            "execve": [['^/bin/ls$'], ['^/bin/cat$']],
             "bind" : True,
             "sendto" : True,
             "connect" : True,
@@ -138,6 +135,8 @@ class ParseProfileFileTest(unittest.TestCase):
         }
         prf=ParseProfileFile("utest/sshd.prf")
         self.assertEqual(profile,prf.getDic())
+        prf=ParseProfileFile("utest/sshd2.prf")
+        self.assertEqual({'execve': True},prf.getDic())
 
     def test_createKeyIfnotExist(self):
         prf=ParseProfileFile("")

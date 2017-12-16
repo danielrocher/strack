@@ -1,4 +1,5 @@
-execve
+execve;/bin/ls
+execve;/bin/cat
 bind
 sendto
 connect

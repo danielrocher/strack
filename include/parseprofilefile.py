@@ -43,15 +43,15 @@ class ParseProfileFile():
                     l=line.split(";")
                     key=l[0].strip()
                     if len(l)==1:
-                        self.createKeyIfnotExist(key, True)
+                        self.dic[key]= True
                     else:
                         self.createKeyIfnotExist(key, [])
 
-                    value=[]
-                    for v in l[1:]:
-                        v=regex.escapeRegEx(v.strip())
-                        value.append(v)
-                    self.addtoDic(key, value)
+                        value=[]
+                        for v in l[1:]:
+                            v=regex.escapeRegEx(v.strip())
+                            value.append(v)
+                        self.addtoDic(key, value)
         except IOError:
             print "Impossible to read profile file !"
             return False
