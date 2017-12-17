@@ -1,0 +1,15 @@
+socket;SOCK_RAW|SOCK_STREAM|SOCK_DGRAM
+accept4
+connect
+sendto
+open;/etc/ld.so.cache;O_RDONLY
+open;/lib/x86_64-linux-gnu/*;O_RDONLY
+open;/usr/lib/*;O_RDONLY
+open;/dev/urandom;O_RDONLY
+open;/etc/gai.conf;O_RDONLY
+open;/etc/apache2/*;O_RDONLY
+open;/etc/localtime;O_RDONLY
+open;/var/www/*;O_RDONLY
+open;/usr/share/*;O_RDONLY
+execve;/usr/sbin/apache2
+execve;./test.sh

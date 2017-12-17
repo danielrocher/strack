@@ -1,0 +1,17 @@
+socket;SOCK_RAW|SOCK_DGRAM|SOCK_STREAM
+bind
+recvfrom
+sendmsg
+recvmsg
+connect
+sendto
+open;/etc/ld.so.cache;O_RDONLY
+open;/lib/*;O_RDONLY
+open;/usr/lib/*;O_RDONLY
+open;/proc/*;O_RDONLY
+open;/dev/urandom;O_RDONLY
+open;/etc/dnsmasq.conf;O_RDONLY
+open;/dev/null;O_RDWR
+open;/usr/share/*;O_RDONLY
+open;/etc/localtime;O_RDONLY
+execve;/usr/sbin/dnsmasq
