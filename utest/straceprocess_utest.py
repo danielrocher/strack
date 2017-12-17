@@ -24,13 +24,15 @@ class StraceProcess(Thread):
         if self.process :
             return
         try:
+            self.running=True
             with open(self.filename) as f:
                 for line in f.readlines():
                     self.stdout(line.replace('\n', ''))
         except IOError:
             print "Impossible to read file"
-            self.process=None
-            self.running=False
+
+        self.process=None
+        self.running=False
 
     def isRunning(self):
         return self.running

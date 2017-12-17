@@ -35,14 +35,14 @@ class ParseStraceTest(unittest.TestCase):
     def setUp(self):
         self.thread=None
         self.required=[
-            ['open', '/etc/ld.so.cache', 'O_RDONLY'], 
+            ['open', '/etc/ld.so.cache', 'O_RDONLY'],
             ['open', '/etc/ld.so.cache', 'O_RDWR'],
             ['execve', './fork_exec'],
             ['bind'],
             ['socket', 'SOCK_STREAM'],
             ['connect']]
 
-            
+
     def callbackWarning(self, l):
         self.syscall.append(l)
 
@@ -71,7 +71,7 @@ class ParseStraceTest(unittest.TestCase):
         self.checkCache()
         # test if no unallowed
         self.assertEqual(0, len(self.syscall))
-        
+
     def test_UnallowedSyscall(self):
         self.profile={
         }
@@ -145,7 +145,7 @@ class ParseProfileFileTest(unittest.TestCase):
         prf.createKeyIfnotExist("key","value")
         self.assertEqual({'key': 'value'},prf.dic)
         prf.createKeyIfnotExist("key2","value")
-        self.assertEqual({'key': 'value', 'key2': 'value'},prf.dic) 
+        self.assertEqual({'key': 'value', 'key2': 'value'},prf.dic)
 
     def test_addtoDic(self):
         prf=ParseProfileFile("")
@@ -196,7 +196,7 @@ class GenRulesSysCallsTest(unittest.TestCase):
         genrules.addSyscall(['open', '/etc/passwd', 'O_RDONLY'])
         self.profile["open"]=[['^/lib/.*$', '^O_RDONLY$'], ['^/lib/1/NOTREMOVE$', '^O_RDWR$'], ['^/etc/passwd$', '^O_RDONLY$']]
         self.assertEqual(self.profile, genrules.getProfile())
-        
+
     def test_addToCacheIfnotExist(self):
         genrules = GenRulesSysCalls({})
         genrules.addToCacheIfnotExist("test")
@@ -230,7 +230,7 @@ class GenRulesSysCallsTest(unittest.TestCase):
         genrules.createKeyIfnotExist("key3",[])
         genrules.addtoDic("key3",["value1", "value2"])
         self.assertEqual({'key': True, 'key2': [['value1', 'value2']], 'key3': [['value1', 'value2']]},genrules.newprofile)
-        
+
     def test_removeDuplicatedRegex(self):
         genrules = GenRulesSysCalls({})
         l=[['listen'], ['open', '/lib/*', 'O_RDONLY']]

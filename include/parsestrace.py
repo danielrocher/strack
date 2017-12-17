@@ -81,7 +81,7 @@ class ParseStrace(Thread):
                             # all patterns matches !
                             self.debug("All pattern matches. {} - {} ".format(key, it),6)
                             return True
-                    
+
                 else:
                     self.debug("Unknown Error :  {}".format(value),6)
             else:
@@ -111,7 +111,10 @@ class ParseStrace(Thread):
 
 
     def isRunning(self):
-        return self.straceprocessthread.isRunning()
+        if self.straceprocessthread:
+            return self.straceprocessthread.isRunning()
+        return False
+
 
     def run(self):
         self.debug("Starting strace ...", 0)
@@ -122,20 +125,17 @@ class ParseStrace(Thread):
         self.straceprocessthread.start()
         self.debug("strace started", 0)
         self.straceprocessthread.join()
-
-    def stop(self):
-        self.debug("Stopping strace ...", 0)
-        if self.straceprocessthread==None :
-            return
-        self.straceprocessthread.stop()
-        self.straceprocessthread.join()
         self.straceprocessthread=None
         self.debug("strace stopped", 0)
 
+    def stop(self):
+        if self.straceprocessthread==None :
+            return
+        self.debug("Stopping strace ...", 0)
+        self.straceprocessthread.stop()
+
 
 if __name__ == '__main__':
-    import signal, time
-    global thread
     profile={
         "execve": True
     }
@@ -144,19 +144,7 @@ if __name__ == '__main__':
         print "not allowed : ", l
 
     thread = ParseStrace(program="/usr/sbin/arp", profile=profile, callbackWarning=callbackWarning, debug=True, loglevel=4)
-    print "Quit with CTRL+C"
-
-    def signal_handler(signal, frame):
-        print "Wait. Stopping all ..."
-        global thread
-        thread.stop()
-        thread.join()
-        thread=None
-
-    signal.signal(signal.SIGINT, signal_handler)
     thread.start()
-
-    while thread:
-       time.sleep(1)
+    thread.join()
 
 

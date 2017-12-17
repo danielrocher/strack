@@ -69,7 +69,7 @@ class GenRulesSysCalls():
                 todoRemove.append(rm)
         newoptimized=[]
         todoRemove=[]
-        
+
         for item in l:
             if item in newoptimized:
                 continue
@@ -118,7 +118,7 @@ class GenRulesSysCalls():
         for c in todoRemove:
             if c in newoptimized:
                 newoptimized.remove(c)
-        
+
         return newoptimized
 
     def removeDuplicate(self, l):
@@ -127,7 +127,7 @@ class GenRulesSysCalls():
             if i not in newlist:
                 newlist.append(i)
         return newlist
-    
+
     def reducePathSize(self, l):
         for item in l:
             if item[0]=="open" and len(item)>2 and item[2]=="O_RDONLY":
@@ -140,10 +140,10 @@ class GenRulesSysCalls():
                     path[3]="*"
                     path="/".join(path[0:4])
                     item[1]=path
-                
+
 
         return self.removeDuplicate(l)
-    
+
     def optimizes(self, l):
         self.debug("len before optimization : {}".format(len(l)), 4)
         tmpl=self.reducePathSize(l)
@@ -185,7 +185,7 @@ class GenRulesSysCalls():
                     itemexist=[itemexist[0], itemexist[1], itemexist[2]+"|"+item[2] ]
                     newoptimized.append(itemexist)
                 else:
-                    newoptimized.append(item)     
+                    newoptimized.append(item)
         self.debug("len after optimization : {}".format(len(newoptimized)), 4)
         return newoptimized
 
@@ -204,7 +204,7 @@ class GenRulesSysCalls():
                 v=regex.escapeRegEx(v.strip())
                 value.append(v)
             self.addtoDic(syscall, value)
-                
+
 
     def debug(self, msg, level=1):
         if self._debug and level<=self.loglevel:

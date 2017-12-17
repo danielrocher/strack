@@ -27,7 +27,7 @@ class ParseProfileFile():
         if currentvalue==True:
             return
         elif type(currentvalue)==list and type(value)==list and len(value)!=0:
-            if value not in currentvalue: 
+            if value not in currentvalue:
                 currentvalue.append(value)
                 self.dic[key]=currentvalue
 
@@ -62,7 +62,7 @@ class ParseProfileFile():
             if not self.parse():
                 self.dic=None
         return self.dic
-        
+
 
 
 if __name__ == '__main__':

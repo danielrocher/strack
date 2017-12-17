@@ -22,7 +22,7 @@ class GenerateProfile():
         if self.profileString!="":
             self.profileString+="\n"
         self.profileString+=regex.removeRegEx(line)
-        
+
     def parse(self):
         self.alreadyparse=True
         for key in self.allowedSyscallDic.keys():
@@ -40,7 +40,7 @@ class GenerateProfile():
         if not self.alreadyparse:
             self.parse()
         return self.profileString
-        
+
     def writeToFilePrf(self, filename):
         l=self.getPrfStrings().split('\n')
         try:
@@ -52,7 +52,7 @@ class GenerateProfile():
             print "Impossible to write to file {}".format(filename)
             return False
         return True
-        
+
 
 if __name__ == '__main__':
     profile={

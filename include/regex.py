@@ -15,5 +15,5 @@ def escapeRegEx(line):
     line=line.replace('.', '\\.').replace('*', '.*')
     line="^"+line+"$"
     return line
-    
+
 

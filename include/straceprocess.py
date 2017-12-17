@@ -40,13 +40,13 @@ class StraceProcess(Thread):
             for line in iter(self.process.stdout.readline, ''):
                 self.stdout(line.replace('\n', ''))
                 if self.process==None :
-                    self.running=False
-                    return
+                    break
 
         except OSError:
             print "Failed to use strace."
-            self.process=None
-            self.running=False
+
+        self.process=None
+        self.running=False
 
     def isRunning(self):
         return self.running
@@ -60,27 +60,14 @@ class StraceProcess(Thread):
 
 
 if __name__ == '__main__':
-    import signal, time
-    global thread
 
     def callback(msg):
         print msg
 
-    def signal_handler(signal, frame):
-        print "Wait. Stopping all ..."
-        global thread
-        thread.stop()
-        thread.join()
-        thread=None
-
     syscalls="execve,open,socket,connect,accept,sendto,recvfrom,sendmsg,recvmsg,bind,listen,socketpair,accept4,recvmmsg,sendmmsg"
     thread = StraceProcess(program="/usr/sbin/arp", syscalls=syscalls, callback=callback)
-    print "Quit with CTRL+C"
-
-    signal.signal(signal.SIGINT, signal_handler)
     thread.start()
+    thread.join()
 
-    while thread:
-       time.sleep(1)
 
 

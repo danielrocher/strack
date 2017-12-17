@@ -5,11 +5,11 @@
 # Portions created by the Initial Developer are Copyright (C) 2017
 
 
-__version__="0.4"
+__version__="0.8"
 
 
 import argparse
-import sys, time, signal, psutil, os
+import sys, signal, psutil, os
 
 from include.parsestrace import *
 from include.parseprofilefile import *
@@ -47,9 +47,8 @@ class Main():
 
         self.straceparse_thread=ParseStrace(self.pid, self.program, dic, callbackWarning=self.callbackWarning, debug=self.debug, loglevel=self.leveldebug)
         self.straceparse_thread.start()
-        
-        while self.straceparse_thread:
-            time.sleep(1)
+        self.straceparse_thread.join()
+        self.quitProgram()
 
     def callbackWarning(self, l):
         print "New call : {}".format(l)
@@ -57,16 +56,17 @@ class Main():
             self.genProf.addSyscall(l)
 
 
-    def signal_handler(self, signal, frame):
-        self.printDebug("Wait. Stopping all ...")
-        self.straceparse_thread.stop()
-        self.straceparse_thread.join()
+    def quitProgram(self):
         if self.genrules_enabled:
             # write new profile in file
             dic=self.genProf.getProfile()
             prf=GenerateProfile(dic)
             prf.writeToFilePrf(self.profile)
         self.straceparse_thread=None
+
+    def signal_handler(self, signal, frame):
+        self.printDebug("Wait. Stopping all ...")
+        self.straceparse_thread.stop()
 
     def printDebug(self, msg):
         if self.debug:
@@ -88,7 +88,7 @@ class Main():
 
         if (args.addrules and not args.profile):
             parser.error('--addrules (-a) require --profile (-p) !')
-            
+
         if args.debug==True:
             self.debug=True
             self.leveldebug=args.leveldebug
@@ -96,8 +96,8 @@ class Main():
         if args.profile:
             self.profile=args.profile
 
-        if args.addrules: 
-            self.genrules_enabled=True 
+        if args.addrules:
+            self.genrules_enabled=True
 
         # test if a number
         try:
@@ -113,7 +113,7 @@ class Main():
             for proc in psutil.process_iter():
                 if proc.name()==args.TRACE:
                     lPid.append(str(proc.pid))
-            
+
             if len(lPid)>0:
                 self.pid=",".join(lPid)
             else:
@@ -130,7 +130,7 @@ class Main():
 
         if self.pid==None and self.program==None:
             print "PID or program is required !"
-            sys.exit(1)   
+            sys.exit(1)
 
 if __name__ == "__main__":
     Main()
