@@ -111,7 +111,13 @@ class Main():
             # search by name
             lPid=[]
             for proc in psutil.process_iter():
-                if proc.name()==args.TRACE:
+                procname=""
+                try:
+                    procname=proc.name() # version >= 2.0
+                except:
+                    procname=proc.name   # version < 2.0
+
+                if procname==args.TRACE:
                     lPid.append(str(proc.pid))
 
             if len(lPid)>0:
