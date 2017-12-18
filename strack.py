@@ -5,11 +5,15 @@
 # Portions created by the Initial Developer are Copyright (C) 2017
 
 
-__version__="0.8"
+__version__="0.8.1"
 
 
 import argparse
-import sys, signal, psutil, os
+import sys, signal, os
+try:
+    import psutil
+except:
+    import include.psutil as psutil # a replacement (light)
 
 from include.parsestrace import *
 from include.parseprofilefile import *
