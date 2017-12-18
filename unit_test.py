@@ -4,10 +4,12 @@
 # Written by Daniel Rocher <erable@resydev.fr>
 # Portions created by the Initial Developer are Copyright (C) 2017
 
+import os
 import unittest
 import include.regex as regex
 import include.parsestrace as parsestrace
-import utest.straceprocess_utest as straceprocess
+import utest.straceprocess_utest as straceprocess_fake
+import include.straceprocess as straceprocess_real
 from include.parseprofilefile import *
 from include.genrulessyscalls import *
 from include.generateprofile import *
@@ -42,6 +44,11 @@ class ParseStraceTest(unittest.TestCase):
             ['socket', 'SOCK_STREAM'],
             ['connect']]
 
+    def which(self, file):
+        for path in os.environ["PATH"].split(os.pathsep):
+            if os.path.exists(os.path.join(path, file)):
+                    return os.path.join(path, file)
+        return None
 
     def callbackWarning(self, l):
         self.syscall.append(l)
@@ -65,7 +72,7 @@ class ParseStraceTest(unittest.TestCase):
         }
         self.syscall=[]
         self.thread = parsestrace.ParseStrace(program="utest/test_strace1.txt", profile=self.profile, callbackWarning=self.callbackWarning)
-        parsestrace.straceprocess=straceprocess
+        parsestrace.straceprocess=straceprocess_fake # use fake
         self.thread.start()
         self.thread.join()
         self.checkCache()
@@ -73,11 +80,9 @@ class ParseStraceTest(unittest.TestCase):
         self.assertEqual(0, len(self.syscall))
 
     def test_UnallowedSyscall(self):
-        self.profile={
-        }
         self.syscall=[]
-        self.thread = parsestrace.ParseStrace(program="utest/test_strace1.txt", profile=self.profile, callbackWarning=self.callbackWarning)
-        parsestrace.straceprocess=straceprocess
+        self.thread = parsestrace.ParseStrace(program="utest/test_strace1.txt", profile={}, callbackWarning=self.callbackWarning)
+        parsestrace.straceprocess=straceprocess_fake # use fake
         self.thread.start()
         self.thread.join()
         self.checkCache()
@@ -87,6 +92,34 @@ class ParseStraceTest(unittest.TestCase):
             self.assertTrue(c in self.syscall)
 
 
+    def test_arp(self):
+        path_arp=self.which('arp')
+        self.syscall=[]
+        self.required=[['execve', path_arp],
+            ['socket', 'SOCK_STREAM'],
+            ['socket', 'SOCK_DGRAM'],
+            ['recvfrom'], ['sendto'],
+            ['open', '/etc/hosts', 'O_RDONLY'],
+            ['open', '/proc/net/arp', 'O_RDONLY']]
+        self.thread = parsestrace.ParseStrace(program=path_arp, profile={}, callbackWarning=self.callbackWarning)
+        parsestrace.straceprocess=straceprocess_real
+        self.thread.start()
+        self.thread.join()
+        self.assertTrue( len(self.syscall) >=7 )
+        for c in self.required:
+            self.assertTrue(c in self.syscall)
+
+    def test_ping(self):
+        path_ping=self.which('ping')
+        self.syscall=[]
+        self.required=[['execve', path_ping], ['socket', 'SOCK_RAW']]
+        self.thread = parsestrace.ParseStrace(program=path_ping, profile={}, callbackWarning=self.callbackWarning)
+        parsestrace.straceprocess=straceprocess_real
+        self.thread.start()
+        self.thread.join()
+        self.assertTrue( len(self.syscall) >=2 )
+        for c in self.required:
+            self.assertTrue(c in self.syscall)
 
 
 class GenerateProfileTest(unittest.TestCase):
