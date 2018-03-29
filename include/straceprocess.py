@@ -30,7 +30,12 @@ class StraceProcess(Thread):
             if self.pid!=None:
                 args=["strace", "-f", "-q", "-p", self.pid, "-e", self.syscalls, "-y" ]
             elif self.program!=None:
-                args=["strace", "-f", "-q", "-e", self.syscalls, "-y", self.program]
+                args=["strace", "-f", "-q", "-e", self.syscalls, "-y"]
+                if type(self.program)==list:
+                    args.extend(self.program)
+                else:
+                    args.append(self.program)
+
             else:
                 print "PID or program is required !"
                 return

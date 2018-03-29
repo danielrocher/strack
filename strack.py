@@ -129,14 +129,15 @@ class Main():
             else:
                 pid=None
                 # test if program exist
-                if not os.path.isfile(args.TRACE):
-                    print "File {} doesn't exist !".format(args.TRACE)
+                cmdline=args.TRACE.split(' ')
+                if not os.path.isfile(cmdline[0]):
+                    print "File {} doesn't exist !".format(cmdline[0])
                     sys.exit(1)
                 # test if file is executable
-                if not os.access(args.TRACE, os.X_OK):
-                    print "File {} is not executable !".format(args.TRACE)
+                if not os.access(cmdline[0], os.X_OK):
+                    print "File {} is not executable !".format(cmdline[0])
                     sys.exit(1)
-                self.program=args.TRACE
+                self.program=cmdline
 
         if self.pid==None and self.program==None:
             print "PID or program is required !"
