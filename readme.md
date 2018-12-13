@@ -9,7 +9,7 @@ _This program is licensed to you under the terms of the GNU General Public Licen
 
 ## Installation
 
-FwdProxy requires : python 2.7 and strace
+Strack requires : python 2.7 and strace
 
 On Debian/Ubuntu :
 
@@ -47,4 +47,20 @@ On Debian/Ubuntu :
     sudo make uninstall
 
 
-**TODO WRITE ME**
+## Examples
+
+
+First time :
+
+    # ./strack.py firefox -p firefox.profil --addrules
+
+
+After a while, quit with *Ctrl+C*, and restart without '--addrules' :
+
+    # ./strack.py firefox -p firefox.profil
+    New call : ['socketpair']
+    New call : ['execve', '/usr/lib/firefox/firefox']
+    ...
+
+
+
