@@ -92,36 +92,6 @@ class ParseStraceTest(unittest.TestCase):
             self.assertTrue(c in self.syscall)
 
 
-    def test_arp(self):
-        path_arp=self.which('arp')
-        self.syscall=[]
-        self.required=[['execve', path_arp],
-            ['socket', 'SOCK_STREAM'],
-            ['socket', 'SOCK_DGRAM'],
-            ['recvfrom'], ['sendto'],
-            ['open', '/etc/hosts', 'O_RDONLY'],
-            ['open', '/proc/net/arp', 'O_RDONLY']]
-        self.thread = parsestrace.ParseStrace(program=path_arp, profile={}, callbackWarning=self.callbackWarning)
-        parsestrace.straceprocess=straceprocess_real
-        self.thread.start()
-        self.thread.join()
-        self.assertTrue( len(self.syscall) >=7 )
-        for c in self.required:
-            self.assertTrue(c in self.syscall)
-
-    def test_ping(self):
-        path_ping=self.which('ping')
-        self.syscall=[]
-        self.required=[['execve', path_ping], ['socket', 'SOCK_RAW']]
-        self.thread = parsestrace.ParseStrace(program=path_ping, profile={}, callbackWarning=self.callbackWarning)
-        parsestrace.straceprocess=straceprocess_real
-        self.thread.start()
-        self.thread.join()
-        self.assertTrue( len(self.syscall) >=2 )
-        for c in self.required:
-            self.assertTrue(c in self.syscall)
-
-
 class GenerateProfileTest(unittest.TestCase):
     def setUp(self):
         self.profile={
