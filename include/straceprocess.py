@@ -69,7 +69,7 @@ if __name__ == '__main__':
     def callback(msg):
         print msg
 
-    syscalls="execve,open,socket,connect,accept,sendto,recvfrom,sendmsg,recvmsg,bind,listen,socketpair,accept4,recvmmsg,sendmmsg"
+    syscalls="execve,open,openat,rename,socket,connect,accept,sendto,recvfrom,sendmsg,recvmsg,bind,listen,socketpair,accept4,recvmmsg,sendmmsg"
     thread = StraceProcess(program="/usr/sbin/arp", syscalls=syscalls, callback=callback)
     thread.start()
     thread.join()

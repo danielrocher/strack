@@ -19,6 +19,8 @@ class ParseStrace(Thread):
         self.syscallsDicPattern={
             "execve"     : ".*\(\"(\S+)\",.*",
             "open"       : ".*\(\"(\S+)\",.*(O_RDONLY|O_RDWR|O_WRONLY).*",
+            "openat"     : ".*\(AT_.*,\s*\"(\S+)\",.*(O_RDONLY|O_RDWR|O_WRONLY).*",
+            "rename"     : ".*\(\"(\S+)\",\s*\"(\S+)\"",
             "socket"     : ".*(SOCK_DGRAM|SOCK_RAW|SOCK_STREAM|SOCK_SEQPACKET).*",
             "connect"    : None,
             "accept"     : None,

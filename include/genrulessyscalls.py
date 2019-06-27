@@ -130,7 +130,7 @@ class GenRulesSysCalls():
 
     def reducePathSize(self, l):
         for item in l:
-            if item[0]=="open" and len(item)>2 and item[2]=="O_RDONLY":
+            if (item[0]=="open" or item[0]=="openat") and len(item)>2 and item[2]=="O_RDONLY":
                 path=item[1].split("/")
                 if len(path)>2 and (path[1]=='proc' or path[1]=='sys'or path[1]=='run'):
                     path[2]="*"
