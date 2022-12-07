@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
@@ -212,7 +212,7 @@ class GenRulesSysCallsTest(unittest.TestCase):
 
     def test_importProfile(self):
         genrules = GenRulesSysCalls(self.profile)
-        self.assertEqual([['listen'], ['open', '/lib/*', 'O_RDONLY'], ['connect'], ['execve'], ['sendto']], genrules.cacheFullProfile)
+        self.assertEqual([['execve'], ['sendto'], ['connect'], ['listen'], ['open', '/lib/*', 'O_RDONLY']], genrules.cacheFullProfile)
 
     def test_createKeyIfnotExist(self):
         genrules = GenRulesSysCalls({})

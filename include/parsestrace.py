@@ -1,12 +1,16 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
 # Portions created by the Initial Developer are Copyright (C) 2017
 
 
-import re, sys
-import straceprocess
+import re
+try:
+    import straceprocess
+except:
+    import include.straceprocess as straceprocess
+
 from threading import Thread, Lock
 
 
@@ -143,7 +147,7 @@ if __name__ == '__main__':
     }
 
     def callbackWarning(l):
-        print "not allowed : ", l
+        print ("not allowed : ", l)
 
     thread = ParseStrace(program="/usr/sbin/arp", profile=profile, callbackWarning=callbackWarning, debug=True, loglevel=4)
     thread.start()

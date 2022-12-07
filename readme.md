@@ -9,7 +9,7 @@ _This program is licensed to you under the terms of the GNU General Public Licen
 
 ## Installation
 
-Strack requires : python 2.7 and strace
+Strack requires : python3 and strace
 
 On Debian/Ubuntu :
 

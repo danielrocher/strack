@@ -1,11 +1,11 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
 # Portions created by the Initial Developer are Copyright (C) 2017
 
 
-__version__="0.8.1"
+__version__="0.9.0"
 
 
 import argparse
@@ -55,7 +55,7 @@ class Main():
         self.quitProgram()
 
     def callbackWarning(self, l):
-        print "New call : {}".format(l)
+        print ("New call : {}".format(l))
         if self.genrules_enabled:
             self.genProf.addSyscall(l)
 
@@ -109,7 +109,7 @@ class Main():
             self.pid=args.TRACE
             # test if pid running
             if not psutil.pid_exists(pid_int):
-                print "PID {} not running !".format(self.pid)
+                print ("PID {} not running !".format(self.pid))
                 sys.exit(1)
         except ValueError:
             # search by name
@@ -131,16 +131,16 @@ class Main():
                 # test if program exist
                 cmdline=args.TRACE.split(' ')
                 if not os.path.isfile(cmdline[0]):
-                    print "File {} doesn't exist !".format(cmdline[0])
+                    print ("File {} doesn't exist !".format(cmdline[0]))
                     sys.exit(1)
                 # test if file is executable
                 if not os.access(cmdline[0], os.X_OK):
-                    print "File {} is not executable !".format(cmdline[0])
+                    print ("File {} is not executable !".format(cmdline[0]))
                     sys.exit(1)
                 self.program=cmdline
 
         if self.pid==None and self.program==None:
-            print "PID or program is required !"
+            print ("PID or program is required !")
             sys.exit(1)
 
 if __name__ == "__main__":

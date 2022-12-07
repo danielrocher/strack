@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
@@ -6,7 +6,11 @@
 
 
 import re
-import regex
+try:
+    import regex
+except:
+    import include.regex as regex
+
 from threading import Lock
 
 """
@@ -253,9 +257,9 @@ if __name__ == '__main__':
     genrules.addSyscall(['socket', 'SOCK_STREAM'])
     genrules.addSyscall(['open' , '/proc/4355/fd' , 'O_RDONLY'])
 
-    print "========\nbefore :", profile
+    print ("========\nbefore :", profile)
     res=genrules.getProfile()
-    print "========\nafter  :", res
+    print ("========\nafter  :", res)
 
 
 

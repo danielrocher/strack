@@ -1,12 +1,14 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
 # Portions created by the Initial Developer are Copyright (C) 2017
 
 
-import re
-import regex
+try:
+    import regex
+except:
+    import include.regex as regex
 
 """
 Get rules, from file.
@@ -53,7 +55,7 @@ class ParseProfileFile():
                             value.append(v)
                         self.addtoDic(key, value)
         except IOError:
-            print "Impossible to read profile file !"
+            print ("Impossible to read profile file !")
             return False
         return True
 
@@ -67,6 +69,6 @@ class ParseProfileFile():
 
 if __name__ == '__main__':
     prf=ParseProfileFile("../profiles/sshd.prf")
-    print prf.getDic()
+    print (prf.getDic())
 
 

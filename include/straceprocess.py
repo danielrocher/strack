@@ -1,11 +1,11 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
 # Portions created by the Initial Developer are Copyright (C) 2017
 
 
-import subprocess, re, sys
+import subprocess
 from threading import Thread
 
 class StraceProcess(Thread):
@@ -37,18 +37,18 @@ class StraceProcess(Thread):
                     args.append(self.program)
 
             else:
-                print "PID or program is required !"
+                print ("PID or program is required !")
                 return
 
             self.process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             self.running=True
-            for line in iter(self.process.stdout.readline, ''):
-                self.stdout(line.replace('\n', ''))
+            for line in iter(self.process.stdout.readline, b''):
+                self.stdout(line.decode().replace('\n', ''))
                 if self.process==None :
                     break
 
         except OSError:
-            print "Failed to use strace."
+            print ("Failed to use strace.")
 
         self.process=None
         self.running=False
@@ -67,7 +67,7 @@ class StraceProcess(Thread):
 if __name__ == '__main__':
 
     def callback(msg):
-        print msg
+        print (msg)
 
     syscalls="execve,open,openat,rename,socket,connect,accept,sendto,recvfrom,sendmsg,recvmsg,bind,listen,socketpair,accept4,recvmmsg,sendmmsg"
     thread = StraceProcess(program="/usr/sbin/arp", syscalls=syscalls, callback=callback)

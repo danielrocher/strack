@@ -1,12 +1,14 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
 # Portions created by the Initial Developer are Copyright (C) 2017
 
 
-import re
-import regex
+try:
+    import regex
+except:
+    import include.regex as regex
 
 """
 From a dictionary, allows to save rules to a file
@@ -49,7 +51,7 @@ class GenerateProfile():
                 f.write(line+'\n')
             f.close()
         except IOError:
-            print "Impossible to write to file {}".format(filename)
+            print ("Impossible to write to file {}".format(filename))
             return False
         return True
 
@@ -66,7 +68,7 @@ if __name__ == '__main__':
         "open" : [['^/dev/null$', '^O_RDWR$'],['^\.$', '^O_RDONLY$'],['^/proc/.*$', '^O_RDONLY$'],['^/dev/.*$', '^O_RDONLY$'], ['^/lib/.*$', '^O_RDONLY$'], ['^/usr/.*$', '^O_RDONLY$'], ['^/etc/.*$', '^O_RDONLY|O_RDWR$']]
     }
     prf=GenerateProfile(profile)
-    print prf.getPrfStrings()
+    print (prf.getPrfStrings())
     prf.writeToFilePrf("/tmp/tmpprofile.prf")
 
 

@@ -1,11 +1,10 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
 # Portions created by the Initial Developer are Copyright (C) 2017
 
 
-import subprocess, re, sys
 from threading import Thread
 
 class StraceProcess(Thread):
@@ -29,7 +28,7 @@ class StraceProcess(Thread):
                 for line in f.readlines():
                     self.stdout(line.replace('\n', ''))
         except IOError:
-            print "Impossible to read file"
+            print ("Impossible to read file")
 
         self.process=None
         self.running=False
@@ -47,7 +46,7 @@ class StraceProcess(Thread):
 
 if __name__ == '__main__':
     def callback(msg):
-        print msg
+        print (msg)
 
     syscalls="execve,open,socket,connect,accept,sendto,recvfrom,sendmsg,recvmsg,bind,listen,socketpair,accept4,recvmmsg,sendmmsg"
     thread = StraceProcess(program="../utest/test_strace.txt", syscalls=syscalls, callback=callback)

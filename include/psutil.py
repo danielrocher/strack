@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Written by Daniel Rocher <erable@resydev.fr>
@@ -28,7 +28,7 @@ def process_iter():
     res=[]
     for pid in pids:
         try:
-            program=open(os.path.join('/proc', pid, 'comm'), 'rb').read()
+            program=open(os.path.join('/proc', pid, 'comm'), 'rb').read().decode()
             program=program.replace("\n", "").strip()
             c=Process(pid, program)
             res.append(c)
@@ -39,7 +39,7 @@ def process_iter():
 
 
 if __name__ == "__main__":
-    print pid_exists(1)
+    print (pid_exists(1))
     for proc in process_iter():
-        print proc.name(), proc.pid
+        print (proc.name(), proc.pid)
 

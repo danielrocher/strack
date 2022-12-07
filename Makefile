@@ -3,8 +3,8 @@ install: build install_program
 
 
 build:
-	pycompile include/
-	pycompile *.py
+	python3 -m py_compile include/*.py
+	python3 -m py_compile *.py
 
 clean:
 	find . -name \*.pyc -type f -delete
