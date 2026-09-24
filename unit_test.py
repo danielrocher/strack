@@ -67,8 +67,8 @@ class ParseStraceTest(unittest.TestCase):
             "connect" : True,
             "listen" : True,
             "recvfrom" : True,
-            "socket": [["^SOCK_RAW|SOCK_STREAM|SOCK_DGRAM$"]],
-            "open" : [['^/dev/null$', '^O_RDWR$'],['^\.$', '^O_RDONLY$'],['^/proc/.*$', '^O_RDONLY$'],['^/dev/.*$', '^O_RDONLY$'], ['^/lib/.*$', '^O_RDONLY$'], ['^/usr/.*$', '^O_RDONLY$'], ['^/etc/.*$', '^O_RDONLY|O_RDWR$']]
+            "socket": [[r"^SOCK_RAW|SOCK_STREAM|SOCK_DGRAM$"]],
+            "open" : [[r'^/dev/null$', r'^O_RDWR$'],[r'^\.$', r'^O_RDONLY$'],[r'^/proc/.*$', r'^O_RDONLY$'],[r'^/dev/.*$', r'^O_RDONLY$'], [r'^/lib/.*$', r'^O_RDONLY$'], [r'^/usr/.*$', r'^O_RDONLY$'], [r'^/etc/.*$', r'^O_RDONLY|O_RDWR$']]
         }
         self.syscall=[]
         self.thread = parsestrace.ParseStrace(program="utest/test_strace1.txt", profile=self.profile, callbackWarning=self.callbackWarning)
@@ -101,8 +101,8 @@ class GenerateProfileTest(unittest.TestCase):
         "connect" : True,
         "listen" : True,
         "recvfrom" : True,
-        "socket": [["^SOCK_RAW|SOCK_STREAM|SOCK_DGRAM$"]],
-        "open" : [['^/dev/null$', '^O_RDWR$'],['^\.$', '^O_RDONLY$'],['^/proc/.*$', '^O_RDONLY$']]
+        "socket": [[r"^SOCK_RAW|SOCK_STREAM|SOCK_DGRAM$"]],
+        "open" : [[r'^/dev/null$', r'^O_RDWR$'],[r'^\.$', r'^O_RDONLY$'],[r'^/proc/.*$', r'^O_RDONLY$']]
         }
         self.required=["recvfrom", "socket;SOCK_RAW|SOCK_STREAM|SOCK_DGRAM", "connect", "sendto", "bind","open;/dev/null;O_RDWR", "open;.;O_RDONLY",
             "open;/proc/*;O_RDONLY", "execve", "listen"]
@@ -127,14 +127,14 @@ class GenerateProfileTest(unittest.TestCase):
 class ParseProfileFileTest(unittest.TestCase):
     def test_classParseProfileFileTest(self):
         profile={
-            "execve": [['^/bin/ls$'], ['^/bin/cat$']],
+            "execve": [[r'^/bin/ls$'], [r'^/bin/cat$']],
             "bind" : True,
             "sendto" : True,
             "connect" : True,
             "listen" : True,
             "recvfrom" : True,
-            "socket": [["^SOCK_RAW|SOCK_STREAM|SOCK_DGRAM$"]],
-            "open" : [['^/dev/null$', '^O_RDWR$'],['^\.$', '^O_RDONLY$'],['^/proc/.*$', '^O_RDONLY$'],['^/dev/.*$', '^O_RDONLY$'], ['^/lib/.*$', '^O_RDONLY$'], ['^/usr/.*$', '^O_RDONLY$'], ['^/etc/.*$', '^O_RDONLY|O_RDWR$']]
+            "socket": [[r"^SOCK_RAW|SOCK_STREAM|SOCK_DGRAM$"]],
+            "open" : [[r'^/dev/null$', r'^O_RDWR$'],[r'^\.$', r'^O_RDONLY$'],[r'^/proc/.*$', r'^O_RDONLY$'],[r'^/dev/.*$', r'^O_RDONLY$'], [r'^/lib/.*$', r'^O_RDONLY$'], [r'^/usr/.*$', r'^O_RDONLY$'], [r'^/etc/.*$', r'^O_RDONLY|O_RDWR$']]
         }
         prf=ParseProfileFile("utest/sshd.prf")
         self.assertEqual(profile,prf.getDic())

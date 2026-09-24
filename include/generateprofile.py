@@ -64,8 +64,8 @@ if __name__ == '__main__':
         "connect" : True,
         "listen" : True,
         "recvfrom" : True,
-        "socket": [["^SOCK_RAW|SOCK_STREAM|SOCK_DGRAM$"]],
-        "open" : [['^/dev/null$', '^O_RDWR$'],['^\.$', '^O_RDONLY$'],['^/proc/.*$', '^O_RDONLY$'],['^/dev/.*$', '^O_RDONLY$'], ['^/lib/.*$', '^O_RDONLY$'], ['^/usr/.*$', '^O_RDONLY$'], ['^/etc/.*$', '^O_RDONLY|O_RDWR$']]
+        "socket": [[r"^SOCK_RAW|SOCK_STREAM|SOCK_DGRAM$"]],
+        "open" : [[r'^/dev/null$', r'^O_RDWR$'],[r'^\.$', r'^O_RDONLY$'],[r'^/proc/.*$', r'^O_RDONLY$'],[r'^/dev/.*$', r'^O_RDONLY$'], [r'^/lib/.*$', r'^O_RDONLY$'], [r'^/usr/.*$', r'^O_RDONLY$'], [r'^/etc/.*$', r'^O_RDONLY|O_RDWR$']]
     }
     prf=GenerateProfile(profile)
     print (prf.getPrfStrings())
